@@ -1,0 +1,8 @@
+<ivy-module version="2.0">
+  <info organisation="xml-resume" module="xml-resume"/>
+  <dependencies>
+    <!-- <dependency org="xerces" name="xercesSamples" rev="2.8.0"/> -->
+    <dependency org="xalan" name="xalan" rev="2.7.1"/>
+    <dependency org="org.apache.xmlgraphics" name="fop" rev="1.1" />
+  </dependencies>
+</ivy-module>

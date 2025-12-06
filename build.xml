@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project default="all">
+
+  <target name="fo">
+    <java classname="org.apache.xalan.xslt.Process">
+      <arg line="-in ${resume.name}.xml -xsl /home/tim/workspace/java/xmlresume-1_5_1/xsl/output/us-letter.xsl -out ${resume.name}.fo" />
+      <classpath>
+	<pathelement location="lib/xalan.jar"/>
+	<pathelement path="${java.class.path}"/>
+      </classpath>
+    </java>
+  </target>
+
+  <target name="rtf">
+    <java classname="com.xmlmind.fo.converter.Driver">
+      <arg line="${resume.name}.fo ${resume.name}.rtf" />
+      <classpath>
+	<pathelement location="lib/xfc.jar"/>
+	<pathelement path="${java.class.path}"/>
+      </classpath>
+    </java>
+  </target>
+
+  <!--<target name="rtf" depends="fo">
+    <java classname="org.apache.fop.cli.Main" fork="true">
+      <arg line="-fo ${resume.name}.fo -rtf ${resume.name}.rtf" />
+      <classpath>
+	<pathelement location="lib/fop.jar"/>
+	<pathelement path="${java.class.path}"/>
+      </classpath>
+    </java>
+  </target>-->
+
+  <target name="pdf" depends="fo">
+    <java classname="org.apache.fop.cli.Main" fork="true">
+      <arg line="-d -fo ${resume.name}.fo -pdf ${resume.name}.pdf" />
+      <classpath>
+	<pathelement location="lib/fop.jar"/>
+	<pathelement path="${java.class.path}"/>
+      </classpath>
+    </java>
+  </target>
+
+  <target name="filter">
+    <java classname="net.sourceforge.xmlresume.filter.Filter">
+      <arg line="-in ${resume.name}.xml -out ${resume.name}-filtered.xml ${filter.targets}" />
+      <classpath>
+	<pathelement location="lib/xmlresume-filter.jar"/>
+	<pathelement location="lib/xalan.jar"/>
+	<pathelement path="${java.class.path}"/>
+      </classpath>
+    </java>
+  </target>
+  
+  <target name="validate">
+    <validate in="${resume.name}.xml"/>
+  </target>
+  
+  <target name="clean">
+    <delete file="${resume.name}.html"/>
+    <delete file="${resume.name}.fo"/>
+    <delete file="${resume.name}.pdf"/>
+    <delete file="${resume.name}.txt"/>
+  </target>
+
+</project>
