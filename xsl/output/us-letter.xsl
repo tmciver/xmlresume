@@ -36,7 +36,7 @@ $Id: us-letter.xsl,v 1.1 2002/05/26 03:45:52 bruckie Exp $
 <xsl:stylesheet version="1.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
-  <xsl:import href="../format/fo.xsl"/>
+  <xsl:import href="../format/fo-two-column.xsl"/>
   <xsl:import href="../paper/letter.xsl"/>
   <xsl:import href="../country/us.xsl"/>
 

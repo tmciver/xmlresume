@@ -183,7 +183,7 @@ $Id: params.xsl,v 1.17 2002/11/28 00:49:03 brandondoyle Exp $
   <xsl:param name="header.item.font.style">italic</xsl:param>
 
   <xsl:param name="body.font.size">10pt</xsl:param>
-  <xsl:param name="body.font.family">serif</xsl:param>
+  <xsl:param name="body.font.family">sans-serif</xsl:param>
 
   <xsl:param name="footer.font.size">8pt</xsl:param>
   <xsl:param name="footer.font.family">serif</xsl:param>

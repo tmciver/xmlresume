@@ -62,8 +62,8 @@ $Id: fo.xsl,v 1.15 2002/11/10 20:48:58 brandondoyle Exp $
       <fo:page-sequence master-reference="resume-page">
         <fo:flow flow-name="xsl-region-body">
           <fo:table table-layout="fixed" width="100%" height="100%">
-            <fo:table-column column-width="35%"/>
-            <fo:table-column column-width="65%"/>
+            <fo:table-column column-width="30%"/>
+            <fo:table-column column-width="70%"/>
             <fo:table-body>
               <fo:table-row height="100%">
                 <fo:table-cell background-color="#0F2D4A" color="white" padding="2em" vertical-align="top">
@@ -71,9 +71,14 @@ $Id: fo.xsl,v 1.15 2002/11/10 20:48:58 brandondoyle Exp $
                     <!-- Left column content -->
                     <xsl:apply-templates select="r:resume/r:header"/>
                     <xsl:apply-templates select="r:resume/r:objective"/>
+                    <xsl:apply-templates select="r:resume/r:skillarea"/>
                     <xsl:apply-templates select="r:resume/r:memberships"/>
                     <xsl:apply-templates select="r:resume/r:misc"/>
                     <xsl:apply-templates select="r:resume/r:interests"/>
+                    <xsl:apply-templates select="r:resume/r:pubs"/>
+                    <xsl:apply-templates select="r:resume/r:awards"/>
+                    <xsl:apply-templates select="r:resume/r:clearances"/>
+                    <xsl:apply-templates select="r:resume/r:referees"/>
                   </fo:block>
                 </fo:table-cell>
                 <fo:table-cell padding="2em" vertical-align="top">
@@ -81,11 +86,6 @@ $Id: fo.xsl,v 1.15 2002/11/10 20:48:58 brandondoyle Exp $
                     <!-- Right column content -->
                     <xsl:apply-templates select="r:resume/r:history"/>
                     <xsl:apply-templates select="r:resume/r:academics"/>
-                    <xsl:apply-templates select="r:resume/r:skillarea"/>
-                    <xsl:apply-templates select="r:resume/r:pubs"/>
-                    <xsl:apply-templates select="r:resume/r:awards"/>
-                    <xsl:apply-templates select="r:resume/r:clearances"/>
-                    <xsl:apply-templates select="r:resume/r:referees"/>
                   </fo:block>
                 </fo:table-cell>
               </fo:table-row>
@@ -116,10 +116,18 @@ $Id: fo.xsl,v 1.15 2002/11/10 20:48:58 brandondoyle Exp $
     <fo:block space-after="3em">
       <fo:block
           font-weight="bold"
-          font-size="24pt"
+          font-size="20pt"
           text-transform="uppercase"
+          text-align="center"
           space-after="0.2em">
         <xsl:apply-templates select="r:name"/>
+      </fo:block>
+      <fo:block
+          font-weight="bold"
+          font-size="12pt"
+          text-align="center"
+          space-after="0.2em">
+        <xsl:text>Senior Haskell Developer</xsl:text>
       </fo:block>
       <!-- The provided PDF has a job title under the name. The standard
            XMLResume DTD doesn't have a place for it in the header.
@@ -389,10 +397,6 @@ $Id: fo.xsl,v 1.15 2002/11/10 20:48:58 brandondoyle Exp $
   </xsl:template>
 
   <xsl:template match="r:subjects" mode="comma">
-    <fo:inline font-style="{$job-subheading.font.style}">
-      <xsl:value-of select="$subjects.word"/>
-      <xsl:value-of select="$title.separator"/>
-    </fo:inline>
     <xsl:apply-templates select="r:subject" mode="comma"/>
     <xsl:value-of select="$subjects.suffix"/>
   </xsl:template>
@@ -413,12 +417,7 @@ $Id: fo.xsl,v 1.15 2002/11/10 20:48:58 brandondoyle Exp $
 
   <!-- Format the subjects section as a list-block -->
   <xsl:template match="r:subjects" mode="table">
-    <fo:inline font-style="{$job-subheading.font.style}">
-      <xsl:value-of select="$subjects.word"/>
-      <xsl:value-of select="$title.separator"/>
-    </fo:inline>
     <fo:list-block
-      start-indent="1.5in"
       provisional-distance-between-starts="150pt"
       provisional-label-separation="0.5em"
     >
