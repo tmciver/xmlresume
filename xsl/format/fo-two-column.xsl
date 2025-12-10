@@ -417,15 +417,10 @@ $Id: fo.xsl,v 1.15 2002/11/10 20:48:58 brandondoyle Exp $
 
   <!-- Format the subjects section as a list-block -->
   <xsl:template match="r:subjects" mode="table">
-    <fo:list-block
-      provisional-distance-between-starts="150pt"
-      provisional-label-separation="0.5em"
-    >
+    <fo:list-block provisional-label-separation="0.5em">
       <xsl:for-each select="r:subject">
         <fo:list-item>
-          <fo:list-item-label
-              end-indent="label-end()"
-          >
+          <fo:list-item-label>
             <fo:block>
               <xsl:apply-templates select="r:title"/>
             </fo:block>
