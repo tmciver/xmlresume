@@ -66,11 +66,12 @@ $Id: fo.xsl,v 1.15 2002/11/10 20:48:58 brandondoyle Exp $
             <fo:table-column column-width="70%"/>
             <fo:table-body>
               <fo:table-row height="100%">
-                <fo:table-cell background-color="#0F2D4A" color="white" padding="2em" vertical-align="top">
+                <fo:table-cell background-color="#0F2D4A" color="white" padding="2em" padding-top="4em" vertical-align="top">
                   <fo:block font-family="{$body.font.family}" font-size="{$body.font.size}">
                     <!-- Left column content -->
                     <xsl:apply-templates select="r:resume/r:header"/>
                     <xsl:apply-templates select="r:resume/r:objective"/>
+                    <xsl:apply-templates select="r:resume/r:academics/r:degrees/r:degree[2]"/>
                     <xsl:apply-templates select="r:resume/r:skillarea"/>
                     <xsl:apply-templates select="r:resume/r:memberships"/>
                     <xsl:apply-templates select="r:resume/r:misc"/>
@@ -81,11 +82,11 @@ $Id: fo.xsl,v 1.15 2002/11/10 20:48:58 brandondoyle Exp $
                     <xsl:apply-templates select="r:resume/r:referees"/>
                   </fo:block>
                 </fo:table-cell>
-                <fo:table-cell padding="2em" vertical-align="top">
+                <fo:table-cell padding="2em" padding-top="4em" vertical-align="top">
                   <fo:block font-family="{$body.font.family}" font-size="{$body.font.size}">
                     <!-- Right column content -->
                     <xsl:apply-templates select="r:resume/r:history"/>
-                    <xsl:apply-templates select="r:resume/r:academics"/>
+                    <xsl:apply-templates select="r:resume/r:academics/r:degrees/r:degree[1]"/>
                   </fo:block>
                 </fo:table-cell>
               </fo:table-row>
@@ -113,20 +114,19 @@ $Id: fo.xsl,v 1.15 2002/11/10 20:48:58 brandondoyle Exp $
   
   <!-- Header information -->
   <xsl:template match="r:header" mode="standard">
-    <fo:block space-after="3em">
+    <fo:block space-after="2em">
       <fo:block
           font-weight="bold"
           font-size="20pt"
           text-transform="uppercase"
           text-align="center"
-          space-after="0.2em">
+          space-after="1.0em">
         <xsl:apply-templates select="r:name"/>
       </fo:block>
       <fo:block
-          font-weight="bold"
-          font-size="12pt"
+          font-size="14pt"
           text-align="center"
-          space-after="0.2em">
+          space-after="2.0em">
         <xsl:text>Senior Haskell Developer</xsl:text>
       </fo:block>
       <!-- The provided PDF has a job title under the name. The standard
@@ -139,7 +139,7 @@ $Id: fo.xsl,v 1.15 2002/11/10 20:48:58 brandondoyle Exp $
       -->
       
       <xsl:if test="r:contact/* or r:address/*">
-        <fo:block space-before="2em">
+        <fo:block>
             <xsl:call-template name="heading">
                 <xsl:with-param name="text">Personal Details</xsl:with-param>
             </xsl:call-template>
@@ -533,8 +533,9 @@ $Id: fo.xsl,v 1.15 2002/11/10 20:48:58 brandondoyle Exp $
   <xsl:template name="bulletListItem">
     <xsl:param name="text"/>
     <fo:list-item>
-      <fo:list-item-label start-indent="{$body.indent}"
-        end-indent="label-end()">
+      <!-- <fo:list-item-label start-indent="{$body.indent}" -->
+      <!--   end-indent="label-end()"> -->
+      <fo:list-item-label>
         <fo:block><xsl:value-of select="$bullet.glyph"/></fo:block>
       </fo:list-item-label>
       <fo:list-item-body start-indent="body-start()">

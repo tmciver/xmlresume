@@ -106,7 +106,7 @@ rtf_proc = java com.xmlmind.fo.converter.Driver $(in) $(out)
 # "targets" attribute) are always included.  
 # Take a look at example2.xml and try changing the filter targets to get a 
 # feel for how the filter works.
-filter_targets = software
+filter_targets = "software,courses"
 filter_proc = java -cp lib/xmlresume-filter.jar:lib/xalan.jar net.sourceforge.xmlresume.filter.Filter -in $(in) -out $(out) $(filter_targets)
 
 #------------------------------------------------------------------------------
