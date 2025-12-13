@@ -35,7 +35,7 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 $Id: fo.xsl,v 1.15 2002/11/10 20:48:58 brandondoyle Exp $
 -->
 
-<xsl:stylesheet version="1.0"
+<xsl:stylesheet version="2.0"
     xmlns:r="http://xmlresume.sourceforge.net/resume/0.0"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:fo="http://www.w3.org/1999/XSL/Format">
@@ -71,7 +71,7 @@ $Id: fo.xsl,v 1.15 2002/11/10 20:48:58 brandondoyle Exp $
                     <!-- Left column content -->
                     <xsl:apply-templates select="r:resume/r:header"/>
                     <xsl:apply-templates select="r:resume/r:objective"/>
-                    <xsl:apply-templates select="r:resume/r:academics/r:degrees/r:degree[2]"/>
+                    <xsl:apply-templates select="r:resume/r:academics/r:degrees/r:degree[2]" mode="table"/>
                     <xsl:apply-templates select="r:resume/r:skillarea"/>
                     <xsl:apply-templates select="r:resume/r:memberships"/>
                     <xsl:apply-templates select="r:resume/r:misc"/>
@@ -324,7 +324,7 @@ $Id: fo.xsl,v 1.15 2002/11/10 20:48:58 brandondoyle Exp $
   </xsl:template>
 
   <!-- Format a single degree -->
-  <xsl:template match="r:degree">
+  <xsl:template match="r:degree" mode="#all">
     <fo:block space-after="{$para.break.space}">
       <fo:block keep-with-next="always">
         <fo:block
@@ -419,9 +419,9 @@ $Id: fo.xsl,v 1.15 2002/11/10 20:48:58 brandondoyle Exp $
   <xsl:template match="r:subjects" mode="table">
     <fo:list-block provisional-label-separation="0.5em">
       <xsl:for-each select="r:subject">
-        <fo:list-item>
+        <fo:list-item space-after="1em">
           <fo:list-item-label>
-            <fo:block>
+            <fo:block font-weight="bold">
               <xsl:apply-templates select="r:title"/>
             </fo:block>
           </fo:list-item-label>

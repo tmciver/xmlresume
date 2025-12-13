@@ -85,11 +85,12 @@ upgrade_13x_140_style = $(xsl_base)/misc/13x-140.xsl
 make = gmake
 
 #xsl_proc = java -cp lib/xalan.jar org.apache.xalan.xslt.Process $(xsl_flags) -in $(in) -xsl $(xsl) -out $(out)
-xsl_proc = Xalan -i 2 -o $(out) $(xsl_flags) $(in) $(xsl)
+#xsl_proc = Xalan -i 2 -o $(out) $(xsl_flags) $(in) $(xsl)
 #xsl_proc = java com.icl.saxon.StyleSheet $(xsl_flags) -o $(out) $(in) $(xsl) $(xsl_params)
+xsl_proc = saxonb $(xsl_flags) -o $(out) $(in) $(xsl) $(xsl_params)
 
-pdf_proc = java -cp lib/fop.jar org.apache.fop.cli.Main -fo $(fo_flags) $(in) -pdf $(out)
-#pdf_proc = fop $(in) $(out)
+#pdf_proc = java -cp lib/fop.jar org.apache.fop.cli.Main -fo $(fo_flags) $(in) -pdf $(out)
+pdf_proc = fop $(in) $(out)
 #pdf_proc = ~/bin/xep/run.sh $(fo_flags) $(in) $(out)
 
 # RTF generation currently requires you download a separate, closed source jar 
