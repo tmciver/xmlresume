@@ -56,24 +56,27 @@ $Id: fo.xsl,v 1.15 2002/11/10 20:48:58 brandondoyle Exp $
           margin="0"
           page-height="{$page.height}"
           page-width="{$page.width}">
-          <fo:region-body/>
+          <fo:region-body margin-top="4em"/>
+          <fo:region-before extent="4em"/>
         </fo:simple-page-master>
       </fo:layout-master-set>
       <fo:page-sequence master-reference="resume-page">
+        <fo:static-content flow-name="xsl-region-before">
+          <fo:table table-layout="fixed" width="100%" height="100%">
+            <fo:table-column column-width="30%" background-color="#0F2D4A"/>
+            <fo:table-column column-width="70%"/>
+            <fo:table-body>
+              <fo:table-row>
+                <fo:table-cell><fo:block/></fo:table-cell>
+                <fo:table-cell><fo:block/></fo:table-cell>
+              </fo:table-row>
+            </fo:table-body>
+          </fo:table>
+        </fo:static-content>
         <fo:flow flow-name="xsl-region-body">
           <fo:table table-layout="fixed" width="100%" height="100%">
             <fo:table-column column-width="30%" background-color="#0F2D4A"/>
             <fo:table-column column-width="70%"/>
-            <fo:table-header>
-              <fo:table-row>
-                <fo:table-cell>
-                  <fo:block height="4em"/>
-                </fo:table-cell>
-                <fo:table-cell>
-                  <fo:block height="4em"/>
-                </fo:table-cell>
-              </fo:table-row>
-            </fo:table-header>
             <fo:table-body>
               <fo:table-row>
                 <fo:table-cell color="white" padding="0em 2em 2em" vertical-align="top">
