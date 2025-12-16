@@ -56,17 +56,17 @@ $Id: fo.xsl,v 1.15 2002/11/10 20:48:58 brandondoyle Exp $
           margin="0"
           page-height="{$page.height}"
           page-width="{$page.width}">
-          <fo:region-body margin="0"/>
+          <fo:region-body margin-top="4em"/>
         </fo:simple-page-master>
       </fo:layout-master-set>
       <fo:page-sequence master-reference="resume-page">
         <fo:flow flow-name="xsl-region-body">
           <fo:table table-layout="fixed" width="100%" height="100%">
-            <fo:table-column column-width="30%"/>
+            <fo:table-column column-width="30%" background-color="#0F2D4A"/>
             <fo:table-column column-width="70%"/>
             <fo:table-body>
               <fo:table-row height="100%">
-                <fo:table-cell background-color="#0F2D4A" color="white" padding="2em" padding-top="4em" vertical-align="top">
+                <fo:table-cell color="white" padding="2em" vertical-align="top">
                   <fo:block font-family="{$body.font.family}" font-size="{$body.font.size}">
                     <!-- Left column content -->
                     <xsl:apply-templates select="r:resume/r:header"/>
@@ -82,7 +82,7 @@ $Id: fo.xsl,v 1.15 2002/11/10 20:48:58 brandondoyle Exp $
                     <xsl:apply-templates select="r:resume/r:referees"/>
                   </fo:block>
                 </fo:table-cell>
-                <fo:table-cell padding="2em" padding-top="4em" vertical-align="top">
+                <fo:table-cell padding="2em" vertical-align="top">
                   <fo:block font-family="{$body.font.family}" font-size="{$body.font.size}">
                     <!-- Right column content -->
                     <xsl:apply-templates select="r:resume/r:history"/>
