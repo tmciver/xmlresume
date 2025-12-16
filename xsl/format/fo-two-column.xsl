@@ -56,53 +56,37 @@ $Id: fo.xsl,v 1.15 2002/11/10 20:48:58 brandondoyle Exp $
           margin="0"
           page-height="{$page.height}"
           page-width="{$page.width}">
-          <fo:region-body/>
+          <fo:region-body margin="4em 2em 2em 32%"/>
+          <fo:region-start extent="30%" background-color="#0F2D4A"/>
         </fo:simple-page-master>
       </fo:layout-master-set>
       <fo:page-sequence master-reference="resume-page">
+
+        <fo:static-content flow-name="xsl-region-start">
+            <fo:block color="white" padding="4em 2em 2em 2em" font-family="{$body.font.family}" font-size="{$body.font.size}">
+                <!-- Left column content -->
+                <xsl:apply-templates select="r:resume/r:header"/>
+                <xsl:apply-templates select="r:resume/r:objective"/>
+                <xsl:apply-templates select="r:resume/r:academics/r:degrees/r:degree[2]" mode="table"/>
+                <xsl:apply-templates select="r:resume/r:skillarea"/>
+                <xsl:apply-templates select="r:resume/r:memberships"/>
+                <xsl:apply-templates select="r:resume/r:misc"/>
+                <xsl:apply-templates select="r:resume/r:interests"/>
+                <xsl:apply-templates select="r:resume/r:pubs"/>
+                <xsl:apply-templates select="r:resume/r:awards"/>
+                <xsl:apply-templates select="r:resume/r:clearances"/>
+                <xsl:apply-templates select="r:resume/r:referees"/>
+            </fo:block>
+        </fo:static-content>
+
         <fo:flow flow-name="xsl-region-body">
-          <fo:table table-layout="fixed" width="100%" height="100%">
-            <fo:table-column column-width="30%" background-color="#0F2D4A"/>
-            <fo:table-column column-width="70%"/>
-            <fo:table-header>
-              <fo:table-row>
-                <fo:table-cell>
-                  <fo:block height="4em"/>
-                </fo:table-cell>
-                <fo:table-cell>
-                  <fo:block height="4em"/>
-                </fo:table-cell>
-              </fo:table-row>
-            </fo:table-header>
-            <fo:table-body>
-              <fo:table-row height="100%">
-                <fo:table-cell color="white" padding="0em 2em 2em" vertical-align="top">
-                  <fo:block font-family="{$body.font.family}" font-size="{$body.font.size}">
-                    <!-- Left column content -->
-                    <xsl:apply-templates select="r:resume/r:header"/>
-                    <xsl:apply-templates select="r:resume/r:objective"/>
-                    <xsl:apply-templates select="r:resume/r:academics/r:degrees/r:degree[2]" mode="table"/>
-                    <xsl:apply-templates select="r:resume/r:skillarea"/>
-                    <xsl:apply-templates select="r:resume/r:memberships"/>
-                    <xsl:apply-templates select="r:resume/r:misc"/>
-                    <xsl:apply-templates select="r:resume/r:interests"/>
-                    <xsl:apply-templates select="r:resume/r:pubs"/>
-                    <xsl:apply-templates select="r:resume/r:awards"/>
-                    <xsl:apply-templates select="r:resume/r:clearances"/>
-                    <xsl:apply-templates select="r:resume/r:referees"/>
-                  </fo:block>
-                </fo:table-cell>
-                <fo:table-cell padding="0em 2em 2em" vertical-align="top">
-                  <fo:block font-family="{$body.font.family}" font-size="{$body.font.size}">
-                    <!-- Right column content -->
-                    <xsl:apply-templates select="r:resume/r:history"/>
-                    <xsl:apply-templates select="r:resume/r:academics/r:degrees/r:degree[1]"/>
-                  </fo:block>
-                </fo:table-cell>
-              </fo:table-row>
-            </fo:table-body>
-          </fo:table>
+            <fo:block font-family="{$body.font.family}" font-size="{$body.font.size}">
+                <!-- Right column content -->
+                <xsl:apply-templates select="r:resume/r:history"/>
+                <xsl:apply-templates select="r:resume/r:academics/r:degrees/r:degree[1]"/>
+            </fo:block>
         </fo:flow>
+
       </fo:page-sequence>
     </fo:root>
   </xsl:template>
